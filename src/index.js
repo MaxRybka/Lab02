@@ -42,7 +42,7 @@ function UpdateCart(){
 
 	window.localStorage.setItem('cart_products' , JSON.stringify(_cart_products));
 	$('.cart-body').empty();
-	if(_cart_products.length == 0) $('.cart-body').append('<span class="card col row " id="no-product-text">No products in cart<span>');
+	if(_cart_products.length == 0) $('.cart-body').append('<span class="card col" id="no-product-text">No products in cart<span>');
 	else
 		JSON.parse(window.localStorage.cart_products).forEach(product => $('.cart-body').append(_makeCartProducts(product)));
 	UpdateCartCounter();
@@ -296,7 +296,6 @@ $(document).on('click' , '#primary-order-btn' , function(){
 		console.log(_phone);
 		var _email = $('#inputEmail').val();
 		console.log(_email);
-
 		var _post = `name=${_name}&email=${_email}&phone=${_phone}`;
 		var counter = 0;
 		for(var i = 0; i < _cart_products.length ; i++){
