@@ -20,12 +20,9 @@ $(document).ready(function(){
 	$('#inputPhone').mask('(000) 000-0000');
 });
 
-function validateEmail(email) {
-  var re =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  console.log(re.test(email));
-  return re.test(email);
-}
 
+
+//!!!----All Functions----!!!\\
 function UpdateCartCounter(){
 	if(typeof window.localStorage.cart_products !== 'undefined' && window.localStorage.cart_products !== null)
 		_cart_products = JSON.parse(window.localStorage.cart_products);
@@ -117,8 +114,66 @@ function AllList(){
 	});
 }
 
-AllList();
+function validateEmail(email) {
+  var re =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
 
+function CheckInput(){
+	var res = true;
+	
+	if($('#inputPhone').val().length != 14){
+		res = false;
+		console.log('wrong');
+		setWrongInput('#inputPhone');
+	}else setRightInput('#inputPhone');
+
+	if(!validateEmail($('#inputEmail').val())){
+		res = false;
+		console.log('wrong');
+		setWrongInput('#inputEmail');
+	}else setRightInput('#inputEmail');
+
+	if($('#inputName').val() == ""){
+		res = false;
+		console.log('wrong');
+		setWrongInput('#inputName');
+	}else setRightInput('#inputName');
+
+	if($('#inputSurname').val() == ""){
+		res = false;
+		console.log('wrong');
+		setWrongInput('#inputSurname');
+	}else setRightInput('#inputSurname');
+
+	return res;
+}
+
+function setWrongInput(el){
+	var $el = $(el);
+	if(!$el.hasClass('is-invalid')){
+		if($el.hasClass('is-valid'))
+			$el.addClass('is-invalid').removeClass('is-valid');
+		else $el.addClass('is-invalid');
+
+	console.log($el.hasClass('is-invalid'))
+	}
+}
+
+function setRightInput(el){
+	var $el = $(el);
+	if(!$el.hasClass('is-valid')){
+		if($el.hasClass('is-invalid'))
+			$el.toggleClass('is-invalid is-valid');
+		else $el.addClass('is-valid');
+	}
+}
+
+
+
+
+
+AllList(); // create a standart list of all products
 
 $(document).on('click' , '.cart-minus-button', function(){
 	ChangeAmmount($(this) , -1);
@@ -196,7 +251,6 @@ $(document).on('click' , '.cart-product-delete', function(){
 	UpdateCart();
 });
 
-//menu toggle
 
 function menuOn(){
 	$('#menu').css("width" , "250px");
@@ -228,9 +282,7 @@ $(document).on('click' , '.menu-all-btn' , function(){
 });
 
 $(document).on('click' , '.menu-btn' , function(){
-	console.log("click");
 	var category = $(this).data('category');
-	console.log(category);
 	var _url = "https://nit.tron.net.ua/api/product/list/category/"+category;
 	jQuery.ajax({
 		url: _url,
@@ -272,8 +324,8 @@ $(document).on('click' , '.more-btn' , function(){
 
 var orderActive = false;
 
+
 $(document).on('click' , '#primary-order-btn' , function(){
-	console.log('click');
 	if(!orderActive  && _cart_products.length != 0) {
 		orderActive = true;
 		$(this).text("Confirm");
@@ -281,7 +333,7 @@ $(document).on('click' , '#primary-order-btn' , function(){
 		$(this).css('background-color','#17c417')
 		$('.order-change').collapse('toggle');
 
-	}else if(orderActive  && _cart_products.length != 0 && $('#inputPhone').val().length == 14 && validateEmail($('#inputEmail').val())){
+	}else if(orderActive  && _cart_products.length != 0 && CheckInput()){
 		$('#cartModal').modal('toggle');
 
 		$('.order-change').collapse('toggle');
@@ -291,11 +343,8 @@ $(document).on('click' , '#primary-order-btn' , function(){
 		$(this).css('background-color','#1f5dc6')
 
 		var _name = $('#inputName').val()+" "+$('#inputSurname').val();
-		console.log(_name);
 		var _phone = $('#inputPhone').val();
-		console.log(_phone);
 		var _email = $('#inputEmail').val();
-		console.log(_email);
 		var _post = `name=${_name}&email=${_email}&phone=${_phone}`;
 		var counter = 0;
 		for(var i = 0; i < _cart_products.length ; i++){
