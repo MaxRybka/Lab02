@@ -6323,27 +6323,17 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   background-color: #8290a5; }
 
-/* The side navigation menu */
 #menu {
   height: 100%;
-  /* 100% Full-height */
   width: 0;
-  /* 0 width - change this with JavaScript */
   position: fixed;
-  /* Stay in place */
   z-index: 2000;
-  /* Stay on top */
   top: 0;
-  /* Stay at the top */
   left: 0;
   background-color: #111;
-  /* Black*/
   overflow-x: hidden;
-  /* Disable horizontal scroll */
   padding-top: 60px;
-  /* Place content 60px from the top */
-  transition: 0.5s;
-  /* 0.5 second transition effect to slide in the sidenav */ }
+  transition: 0.5s; }
 
 #main {
   position: fixed;
@@ -6355,7 +6345,6 @@ body {
   z-index: 1999;
   pointer-events: none; }
 
-/* The navigation menu links */
 #menu a {
   padding: 8px 8px 8px 32px;
   font-size: 25px;
@@ -6363,11 +6352,9 @@ body {
   display: block;
   transition: 0.3s; }
 
-/* When you mouse over the navigation links, change their color */
 #menu a:hover {
   color: #f1f1f1; }
 
-/* Position and style the close button (top right corner) */
 #menu #close-menu-btn {
   position: absolute;
   top: 0;
@@ -6375,7 +6362,6 @@ body {
   font-size: 36px;
   margin-left: 50px; }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   #menu {
     padding-top: 15px; }
@@ -6387,7 +6373,7 @@ body {
   object-fit: contain; }
 
 .products-container {
-  background-color: #364b60; }
+  background-color: #8290a5; }
 
 .product-grid {
   margin-top: 70px;
@@ -6413,7 +6399,8 @@ body {
   width: 30px;
   height: 30px;
   right: 10px;
-  top: 10px; }
+  top: 10px;
+  background-color: rgba(0, 0, 0, 0); }
 
 .cart-price {
   text-align: center; }
