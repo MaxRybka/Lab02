@@ -175,11 +175,6 @@ function setRightInput(el){
 
 AllList(); // create a standart list of all products
 
-$(document).on('click' , '.cart-minus-button', function(){
-	ChangeAmmount($(this) , -1);
-});
-
-
 jQuery.ajax({
 	url: 'https://nit.tron.net.ua/api/category/list',
 	method: 'get',
